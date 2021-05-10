@@ -10,13 +10,19 @@ export default function SearchPage({ events }) {
 
   return (
     <Layout title='Search results'>
-      <Link href='/events'>Go Back</Link>
-      <h1>Search Results for {router.query.term}</h1>
-      {events.length === 0 && <h3>No events to show</h3>}
+      <section className='text-gray-600 body-font overflow-hidden pt-12'>
+        <div className='lg:w-4/5 mx-auto pl-4 mt-2'>
+          <Link href='/events'>Go Back</Link>
+          <h1 className='text-4xl font-bold mt-4 mb-8'>
+            Search Results for {router.query.term}
+          </h1>
+          {events.length === 0 && <h3 className='mb-96'>No events to show</h3>}
+        </div>
 
-      {events.map((evt) => (
-        <EventItem key={evt.id} evt={evt} />
-      ))}
+        {events.map((evt) => (
+          <EventItem key={evt.id} evt={evt} />
+        ))}
+      </section>
     </Layout>
   );
 }
@@ -26,9 +32,10 @@ export async function getServerSideProps({ query: { term } }) {
     _where: {
       _or: [
         { name_contains: term },
-        { performers_contains: term },
+        { organizer_contains: term },
         { description_contains: term },
         { venue_contains: term },
+        { city_contains: term },
       ],
     },
   });

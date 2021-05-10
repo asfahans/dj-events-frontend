@@ -32,12 +32,18 @@ export default function ImageUpload({ evtId, imageUploaded, token }) {
 
   return (
     <div className={styles.form}>
-      <h1>Upload Event Image</h1>
+      <h1 className='text-xl font-bold flex text-black mb-4'>
+        Upload Event Image
+      </h1>
       <form onSubmit={handleSubmit}>
         <div className={styles.file}>
           <input type='file' onChange={handleFileChange} />
         </div>
-        <input type='submit' value='upload' className='btn' />
+        <input
+          type='submit'
+          value='upload'
+          className='items-center bg-red-500 text-white text-xs border-0 py-1 px-3 focus:outline-none hover:bg-red-600 rounded text-base'
+        />
       </form>
     </div>
   );

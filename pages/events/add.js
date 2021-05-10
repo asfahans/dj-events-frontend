@@ -14,11 +14,13 @@ export default function AddEventPage({ token }) {
 
   const [values, setValues] = useState({
     name: '',
-    performers: '',
+    organizer: '',
     venue: '',
     address: '',
-    date: '',
-    time: '',
+    fromDate: '',
+    toDate: '',
+    city: '',
+    website: '',
     description: '',
   });
 
@@ -62,86 +64,125 @@ export default function AddEventPage({ token }) {
 
   return (
     <Layout title='Add New Event'>
-      <Link href='/events'>Go Back</Link>
-      <h1>Add Event</h1>
-      <ToastContainer />
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <div className={styles.grid}>
-          <div>
-            <label htmlFor='name'>Event Name</label>
-            <input
-              type='text'
-              id='name'
-              name='name'
-              value={values.name}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div>
-            <label htmlFor='performers'>Performers</label>
-            <input
-              type='text'
-              name='performers'
-              id='performers'
-              value={values.performers}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div>
-            <label htmlFor='venue'>Venue</label>
-            <input
-              type='text'
-              name='venue'
-              id='venue'
-              value={values.venue}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div>
-            <label htmlFor='address'>Address</label>
-            <input
-              type='text'
-              name='address'
-              id='address'
-              value={values.address}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div>
-            <label htmlFor='date'>Date</label>
-            <input
-              type='date'
-              name='date'
-              id='date'
-              value={values.date}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div>
-            <label htmlFor='time'>Time</label>
-            <input
-              type='text'
-              name='time'
-              id='time'
-              value={values.time}
-              onChange={handleInputChange}
-            />
-          </div>
-        </div>
+      <section className='text-gray-600 body-font overflow-hidden pt-12 pb-8 pb-12'>
+        <div className='lg:w-3/5 mx-auto pl-4 mt-2'>
+          <Link href='/events'>Go Back</Link>
+          <h1 className='text-4xl font-bold flex text-black mt-4 mb-8'>
+            Add Event
+          </h1>
+          <ToastContainer />
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <div className={styles.grid}>
+              <div>
+                <label htmlFor='name'>Event Name</label>
+                <input
+                  type='text'
+                  id='name'
+                  name='name'
+                  value={values.name}
+                  onChange={handleInputChange}
+                  className='border border-black rounded'
+                />
+              </div>
+              <div>
+                <label htmlFor='organizer'>Organizer</label>
+                <input
+                  type='text'
+                  name='organizer'
+                  id='organizer'
+                  value={values.organizer}
+                  onChange={handleInputChange}
+                  className='border border-black rounded'
+                />
+              </div>
+              <div>
+                <label htmlFor='fromDate'>From Date</label>
+                <input
+                  type='date'
+                  name='fromDate'
+                  id='fromDate'
+                  value={values.fromDate}
+                  onChange={handleInputChange}
+                  className='border border-black rounded'
+                />
+              </div>
+              <div>
+                <label htmlFor='toDate'>To Date</label>
+                <input
+                  type='date'
+                  name='toDate'
+                  id='toDate'
+                  value={values.toDate}
+                  onChange={handleInputChange}
+                  className='border border-black rounded'
+                />
+              </div>
+              <div>
+                <label htmlFor='venue'>Venue</label>
+                <input
+                  type='text'
+                  name='venue'
+                  id='venue'
+                  value={values.venue}
+                  onChange={handleInputChange}
+                  className='border border-black rounded'
+                />
+              </div>
+              <div>
+                <label htmlFor='address'>Address</label>
+                <input
+                  type='text'
+                  name='address'
+                  id='address'
+                  value={values.address}
+                  onChange={handleInputChange}
+                  className='border border-black rounded'
+                />
+              </div>
+              <div>
+                <label htmlFor='city'>City</label>
+                <input
+                  type='text'
+                  name='city'
+                  id='city'
+                  value={values.city}
+                  onChange={handleInputChange}
+                  className='border border-black rounded'
+                />
+              </div>
+              <div>
+                <label htmlFor='website'>Website</label>
+                <input
+                  type='text'
+                  name='website'
+                  id='website'
+                  value={values.website}
+                  onChange={handleInputChange}
+                  className='border border-black rounded'
+                />
+              </div>
+            </div>
 
-        <div>
-          <label htmlFor='description'>Event Description</label>
-          <textarea
-            type='text'
-            name='description'
-            id='description'
-            value={values.description}
-            onChange={handleInputChange}
-          ></textarea>
-        </div>
+            <div>
+              <label htmlFor='description'>Event Description</label>
+              <textarea
+                type='text'
+                name='description'
+                id='description'
+                value={values.description}
+                onChange={handleInputChange}
+                className='border border-black rounded p-2'
+              ></textarea>
+            </div>
 
-        <input type='submit' value='Add Event' className='btn' />
-      </form>
+            <input
+              type='submit'
+              value='Add Event'
+              className='items-center bg-red-500 text-white text-xs border-0 py-1 px-3 focus:outline-none hover:bg-red-600 rounded text-base'
+            />
+          </form>
+        </div>
+      </section>
     </Layout>
   );
 }

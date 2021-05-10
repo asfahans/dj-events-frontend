@@ -10,53 +10,48 @@ export default function Header() {
   const { user, logout } = useContext(AuthContext);
 
   return (
-    <header className={styles.header}>
-      <div className={styles.logo}>
+    <header className='text-gray-600 bg-white body-font shadow-lg mb-2'>
+      <div className='container-2xl mx-auto flex flex-wrap px-10 p-5 flex-col md:flex-row items-center'>
         <Link href='/'>
-          <a>DJ Events</a>
+          <a className='flex title-font font-medium items-center text-red-600 mb-4 md:mb-0'>
+            <span className='ml-3 text-3xl font-bold'>ExhiFairs</span>
+          </a>
         </Link>
-      </div>
-      <Search />
-      <nav>
-        <ul>
-          <li>
-            <Link href='/events'>
-              <a>Events</a>
+
+        <div className='md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center md:w-1/2 lg:w-2/5 xl:w-1/4 w-4/5'>
+          <Search />
+        </div>
+
+        <Link href='/events'>
+          <a className='px-2 mx-2 hover:text-red-600'>Events</a>
+        </Link>
+
+        {user ? (
+          <>
+            <Link href='/events/add'>
+              <a className='px-2 mx-2 hover:text-red-600'>Add Event</a>
             </Link>
-          </li>
-          {user ? (
-            // If logged in
-            <>
-              <li>
-                <Link href='/events/add'>
-                  <a>Add Event</a>
-                </Link>
-              </li>
-              <li>
-                <Link href='/account/dashboard'>
-                  <a>Dashboard</a>
-                </Link>
-              </li>
-              <li>
-                <button
-                  onClick={() => logout()}
-                  className='btn-secondary btn-icon'
-                >
-                  <FaSignOutAlt /> Logout
-                </button>
-              </li>
-            </>
-          ) : (
-            <li>
-              <Link href='/account/login'>
-                <a className='btn-secondary btn-icon'>
-                  <FaSignInAlt /> Login
-                </a>
-              </Link>
-            </li>
-          )}
-        </ul>
-      </nav>
+
+            <Link href='/account/dashboard'>
+              <a className='px-2 mx-2 hover:text-red-600'>Dashboard</a>
+            </Link>
+            <button
+              onClick={() => logout()}
+              className='inline-flex items-center bg-red-500 text-white text-xs border-0 py-1 px-3 focus:outline-none hover:bg-red-600 ml-4 rounded text-base mt-4 md:mt-0'
+            >
+              <span className='text-sm'>Logout</span>
+            </button>
+          </>
+        ) : (
+          <>
+            <Link href='/account/login'>
+              <a className='inline-flex items-center bg-red-500 text-white text-xs border-0 py-1 px-3 focus:outline-none hover:bg-red-600 ml-4 rounded text-base mt-4 md:mt-0 text-sm'>
+                <span className='text-sm'>Login</span>
+              </a>
+            </Link>
+          </>
+        )}
+      </div>
     </header>
   );
 }

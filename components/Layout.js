@@ -1,9 +1,7 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import styles from '@/styles/Layout.module.css';
 import Footer from './Footer';
 import Header from './Header';
-import Showcase from './Showcase';
 
 export default function Layout({ title, keywords, description, children }) {
   const router = useRouter();
@@ -16,9 +14,8 @@ export default function Layout({ title, keywords, description, children }) {
         <meta name='keywords' content={keywords} />
       </Head>
       <Header />
-      {router.pathname === '/' && <Showcase />}
       {/*  */}
-      <div className={styles.container}>{children}</div>
+      <div className=''>{children}</div>
       {/*  */}
       <Footer />
     </div>
@@ -26,7 +23,8 @@ export default function Layout({ title, keywords, description, children }) {
 }
 
 Layout.defaultProps = {
-  title: 'DJ Events | Find the hottest parties',
-  description: 'Find the latest DJ and other musical events',
-  keywords: 'music, dj, edm, events',
+  title: 'Exhifairs | Connecting Researchers, Building Communities',
+  description:
+    'Get upcoming details of conferences, events, seminars & workshops in India',
+  keywords: 'conferences, events, seminars, workshops',
 };

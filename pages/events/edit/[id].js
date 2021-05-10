@@ -19,11 +19,13 @@ export default function EditEventPage({ evt, token }) {
 
   const [values, setValues] = useState({
     name: evt.name,
-    performers: evt.performers,
+    organizer: evt.organizer,
     venue: evt.venue,
     address: evt.address,
-    date: evt.date,
-    time: evt.time,
+    fromDate: evt.fromDate,
+    toDate: evt.toDate,
+    city: evt.city,
+    website: evt.website,
     description: evt.description,
   });
 
@@ -80,108 +82,153 @@ export default function EditEventPage({ evt, token }) {
 
   return (
     <Layout title='Edit Event'>
-      <Link href='/events'>Go Back</Link>
-      <h1>Edit Event</h1>
-      <ToastContainer />
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <div className={styles.grid}>
-          <div>
-            <label htmlFor='name'>Event Name</label>
+      <section className='text-gray-600 body-font overflow-hidden pt-12 pb-8 pb-12'>
+        <div className='lg:w-3/5 mx-auto pl-4 mt-2'>
+          <Link href='/events'>Go Back</Link>
+          <h1 className='text-4xl font-bold flex text-black mt-4 mb-8'>
+            Edit Event
+          </h1>
+          <ToastContainer />
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <div className={styles.grid}>
+              <div>
+                <label htmlFor='name'>Event Name</label>
+                <input
+                  type='text'
+                  id='name'
+                  name='name'
+                  value={values.name}
+                  onChange={handleInputChange}
+                  className='border border-black rounded'
+                />
+              </div>
+              <div>
+                <label htmlFor='organizer'>Organizer</label>
+                <input
+                  type='text'
+                  name='organizer'
+                  id='organizer'
+                  value={values.organizer}
+                  onChange={handleInputChange}
+                  className='border border-black rounded'
+                />
+              </div>
+              <div>
+                <label htmlFor='fromDate'>From Date</label>
+                <input
+                  type='date'
+                  name='fromDate'
+                  id='fromDate'
+                  value={moment(values.fromDate).format('yyyy-MM-DD')}
+                  onChange={handleInputChange}
+                  className='border border-black rounded'
+                />
+              </div>
+              <div>
+                <label htmlFor='toDate'>To Date</label>
+                <input
+                  type='date'
+                  name='toDate'
+                  id='toDate'
+                  value={moment(values.toDate).format('yyyy-MM-DD')}
+                  onChange={handleInputChange}
+                  className='border border-black rounded'
+                />
+              </div>
+              <div>
+                <label htmlFor='venue'>Venue</label>
+                <input
+                  type='text'
+                  name='venue'
+                  id='venue'
+                  value={values.venue}
+                  onChange={handleInputChange}
+                  className='border border-black rounded'
+                />
+              </div>
+              <div>
+                <label htmlFor='address'>Address</label>
+                <input
+                  type='text'
+                  name='address'
+                  id='address'
+                  value={values.address}
+                  onChange={handleInputChange}
+                  className='border border-black rounded'
+                />
+              </div>
+              <div>
+                <label htmlFor='city'>City</label>
+                <input
+                  type='text'
+                  name='city'
+                  id='city'
+                  value={values.city}
+                  onChange={handleInputChange}
+                  className='border border-black rounded'
+                />
+              </div>
+              <div>
+                <label htmlFor='website'>Website</label>
+                <input
+                  type='text'
+                  name='website'
+                  id='website'
+                  value={values.website}
+                  onChange={handleInputChange}
+                  className='border border-black rounded'
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor='description'>Event Description</label>
+              <textarea
+                type='text'
+                name='description'
+                id='description'
+                value={values.description}
+                onChange={handleInputChange}
+                className='border border-black rounded p-2'
+              ></textarea>
+            </div>
+
             <input
-              type='text'
-              id='name'
-              name='name'
-              value={values.name}
-              onChange={handleInputChange}
+              type='submit'
+              value='Edit Event'
+              className='items-center bg-red-500 text-white text-xs border-0 py-1 px-3 focus:outline-none hover:bg-red-600 rounded text-base'
             />
-          </div>
+          </form>
+
+          <h2 className='text-2xl font-bold flex text-black my-4'>
+            Event Image
+          </h2>
+          {imagePreview ? (
+            <Image src={imagePreview} height={100} width={170} />
+          ) : (
+            <div>
+              <p>No Image uploaded</p>
+            </div>
+          )}
           <div>
-            <label htmlFor='performers'>Performers</label>
-            <input
-              type='text'
-              name='performers'
-              id='performers'
-              value={values.performers}
-              onChange={handleInputChange}
-            />
+            <button
+              onClick={() => setShowModal(true)}
+              className='flex items-center bg-black text-white text-xs border-0 mt-2 py-1 px-3 focus:outline-none hover:bg-gray-600 rounded text-base'
+            >
+              <FaImage />
+              <span className='ml-2'>Set Image</span>
+            </button>
           </div>
-          <div>
-            <label htmlFor='venue'>Venue</label>
-            <input
-              type='text'
-              name='venue'
-              id='venue'
-              value={values.venue}
-              onChange={handleInputChange}
+
+          <Modal show={showModal} onClose={() => setShowModal(false)}>
+            <ImageUpload
+              evtId={evt.id}
+              imageUploaded={imageUploaded}
+              token={token}
             />
-          </div>
-          <div>
-            <label htmlFor='address'>Address</label>
-            <input
-              type='text'
-              name='address'
-              id='address'
-              value={values.address}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div>
-            <label htmlFor='date'>Date</label>
-            <input
-              type='date'
-              name='date'
-              id='date'
-              value={moment(values.date).format('yyyy-MM-DD')}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div>
-            <label htmlFor='time'>Time</label>
-            <input
-              type='text'
-              name='time'
-              id='time'
-              value={values.time}
-              onChange={handleInputChange}
-            />
-          </div>
+          </Modal>
         </div>
-
-        <div>
-          <label htmlFor='description'>Event Description</label>
-          <textarea
-            type='text'
-            name='description'
-            id='description'
-            value={values.description}
-            onChange={handleInputChange}
-          ></textarea>
-        </div>
-
-        <input type='submit' value='Edit Event' className='btn' />
-      </form>
-
-      <h2>Event Image</h2>
-      {imagePreview ? (
-        <Image src={imagePreview} height={100} width={170} />
-      ) : (
-        <div>
-          <p>No Image uploaded</p>
-        </div>
-      )}
-      <div>
-        <button onClick={() => setShowModal(true)} className='btn-secondary'>
-          <FaImage /> Set Image
-        </button>
-      </div>
-
-      <Modal show={showModal} onClose={() => setShowModal(false)}>
-        <ImageUpload
-          evtId={evt.id}
-          imageUploaded={imageUploaded}
-          token={token}
-        />
-      </Modal>
+      </section>
     </Layout>
   );
 }

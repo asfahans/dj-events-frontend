@@ -2,7 +2,7 @@ import { parseCookies } from '@/helpers/index';
 import Layout from '@/components/Layout';
 import DashboardEvent from '@/components/DashboardEvent';
 import { API_URL } from '@/config/index';
-import styles from '@/styles/Dashboard.module.css';
+
 import { useRouter } from 'next/router';
 
 export default function DashboardPage({ events, token }) {
@@ -28,13 +28,18 @@ export default function DashboardPage({ events, token }) {
   };
   return (
     <Layout title='Dashboard'>
-      <div className={styles.dash}>
-        <h1>Dashboard</h1>
-        <h3>My Events</h3>
-        {events.map((evt) => (
-          <DashboardEvent key={evt.id} evt={evt} handleDelete={deleteEvent} />
-        ))}
-      </div>
+      <section className='text-gray-600 body-font overflow-hidden pt-12 pb-8'>
+        <div className='lg:w-3/5 mx-auto pl-4 mt-2'>
+          <h1 className='text-4xl font-bold'>Dashboard</h1>
+          <h3 className='text-2xl font-bold mt-8 mb-4 text-red-500'>
+            My Events
+          </h3>
+
+          {events.map((evt) => (
+            <DashboardEvent key={evt.id} evt={evt} handleDelete={deleteEvent} />
+          ))}
+        </div>
+      </section>
     </Layout>
   );
 }
